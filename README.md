@@ -10,7 +10,7 @@ Versão MySQL Server instalada: 5.7.39
 
 Versão Docker instalada: 4.11.1
 
-Passo a Passo para rodar o Projeto:
+<strong>Passo a Passo para rodar o Projeto:</strong>
 
 1) Com o gitbash ou terminal desejado, vá até o caminho da pasta BlockchainFRONT, execute a aplicação java com o seguinte comando(Lembre-se de trocar a senha do seu banco, se não houver deixe o campo password vazio):
 
