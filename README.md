@@ -1,6 +1,6 @@
 # Aplicação Blockchain
 
-Instalações necessárias:
+<strong>Instalações necessárias:</strong>
 
 Versão Java instalada: 8.0.3210.7
 
