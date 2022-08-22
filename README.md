@@ -21,7 +21,7 @@ Versão Docker instalada: 4.11.1
 
 2) Acessar endereços da aplicação java:
 
-  Primeiro: http://localhost:8080/magic/generate/roles/
+  Primeiro: http://localhost:8080/magic/generate/roles/<br>
   Segundo: http://localhost:8080/magic/generate/owner/
 
   O primeiro endereço gera os perfis de acesso da nossa aplicação. O segundo gera um usuário capaz de criar eleições, aprovar candidatos etc.
