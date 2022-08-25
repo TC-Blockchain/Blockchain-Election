@@ -37,3 +37,16 @@ Versão Docker instalada: 4.11.1
   Utilizando o terminal, vá até a pasta BlockchainAPI e execute o comando: 
 
   node index.js
+
+5) Endpoints:
+
+Java: localhost:8080/login
+
+Sawtooth: Blocos da blockchain: localhost:8008/blocks
+
+Visualização dos dados da blockchain do sawtooth (Consulta): localhost:8008/state  localhost:8008/state?address=e659db (busca com o prefixo, 6 caracteres do hash)
+
+JavaScript: Todos os votos(Sem a informação de quem votou): localhost:8084/search/e659db
+
+
+

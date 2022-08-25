@@ -7,9 +7,9 @@ const request = require('request');
 function handlerInfo(){
   const familyName = 'onlinevoting';
   return {
-            prefix : getAddress(familyName, 6),
-            family : familyName,
-            version :'0.0.1'
+            prefix : getAddress(familyName, 6),// Prefixo Objeto que define onde que a transação pode ser escrita que é a partir da propriedade input e output, getAdress: hash baseado na info passada e quantidade de caracteres.
+            family : familyName, //Nome definido
+            version :'0.0.1'//Versão de informação
         };
 }
 
@@ -18,7 +18,11 @@ function getAddress(key, length) {
 }
 
 function calculateVoteAddress(payload) {
-  return handlerInfo().prefix + getAddress(payload.ellectionName,20) + getAddress(payload.userNumber,20) + getAddress(payload.address,24);
+  return handlerInfo().prefix + getAddress(payload.ellectionName,20) + getAddress(payload.userNumber,20) + getAddress(payload.address,24);/*Regra de negócio do endereço:
+  Método que calcula o endereço do voto, chamado pelo handler. Todo voto fica dentro desse prefixo + 20 caracteres que define o nome da eleicao + 20 caracteres do usuarios + 24
+  caracteres do endereço todos gerados por hash.
+  A documentação do sawthoot sugere que vc crie o endereço em função das pesquisas que irá fazer.
+  */
 }
 
 const getAssetAddress = payload => handlerInfo().prefix + getAddress(payload.ellectionName,20) + getAddress(payload.userNumber,20) + getAddress(payload.address,24)
@@ -44,6 +48,25 @@ function sendToSawtoothApi(batchBytes) {
     })
 }
 
+function searchBlockchain(address,callback) {//Endpoint tratado com o JSON que ele retorna
+  request({
+      url: `http://localhost:8008/state?address=${address}`,
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    }, (error, response, body) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const items = JSON.parse(response.body).data;//Propriedade data retorna um array
+
+        const decodedInfo = items.map((item) => {//Map para cada uma informação data
+          return JSON.parse(new Buffer(item.data, 'base64').toString());//Decodado em base64 e foi criado o objeto
+        });
+
+        callback(decodedInfo);
+      }
+    })
+}
 
 function buildSawtoothPackage(payloadBytes,privateKey){
 
@@ -120,4 +143,4 @@ function buildSawtoothPackage(payloadBytes,privateKey){
   return batchBytes;
 }
 
-module.exports = { buildSawtoothPackage,sendToSawtoothApi,handlerInfo,calculateVoteAddress}
+module.exports = { buildSawtoothPackage,sendToSawtoothApi,handlerInfo,calculateVoteAddress,searchBlockchain}
