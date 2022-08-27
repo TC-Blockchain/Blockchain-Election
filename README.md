@@ -1,6 +1,6 @@
 # Aplicação Blockchain
 
-<strong>Instalações necessárias:</strong>
+## Instalações necessárias:
 
 Versão Java instalada: 8.0.3210.7
 
@@ -10,30 +10,49 @@ Versão MySQL Server instalada: 5.7.39
 
 Versão Docker instalada: 4.11.1
 
-<strong>Passo a Passo para rodar o Projeto:</strong>
+## Passo a Passo para rodar o Projeto:
 
-1) Com o gitbash ou terminal desejado, vá até o caminho da pasta BlockchainFRONT, execute a aplicação java com o seguinte comando(Lembre-se de trocar a senha do seu banco, se não houver deixe o campo password vazio):
-
-
+### 1) Com o gitbash ou terminal desejado, vá até o caminho da pasta BlockchainFRONT, execute a aplicação java com o seguinte comando (Lembre-se de trocar a senha do seu banco, se não houver deixe o campo password vazio):
+  
+  ```
   java -Dspring.datasource.username=root -Dspring.datasource.password=SUASENHAAQUI  -jar webapp-runner.jar --port 8080 --expand-war eleicoesonline.war
-
+  ```
+  
   Informação indicando o exito: Started Boot in 16.208 seconds
 
-2) Acessar endereços da aplicação java:
+### 2) Acessar endereços da aplicação java:
 
   Primeiro: http://localhost:8080/magic/generate/roles/<br>
   Segundo: http://localhost:8080/magic/generate/owner/
 
   O primeiro endereço gera os perfis de acesso da nossa aplicação. O segundo gera um usuário capaz de criar eleições, aprovar candidatos etc.
 
-3) Executando o Sawthooth:
+### 3) Executando o Sawthooth:
 
   Utilizando o terminal, vá até a pasta BlockchainAPI e execute o comando: 
 
+  ```
   docker-compose -f sawtooth-default.yaml up
-
-4) Executando a Aplicação JavaScript:
+  ```
+  
+### 4) Executando a Aplicação JavaScript:
 
   Utilizando o terminal, vá até a pasta BlockchainAPI e execute o comando: 
-
+  
+  ```
+  npm install
   node index.js
+  ```
+
+### 5) Endpoints:
+
+Java: localhost:8080/login
+
+Sawtooth: Blocos da blockchain: localhost:8008/blocks
+
+Visualização dos dados da blockchain do sawtooth (Consulta): localhost:8008/state  localhost:8008/state?address=e659db (busca com o prefixo, 6 caracteres do hash)
+
+JavaScript: Todos os votos(Sem a informação de quem votou): localhost:8084/search/e659db
+
+
+
